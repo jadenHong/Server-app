@@ -116,3 +116,26 @@ const deleteData = async (id) => {
     const [rows] = await promisePool.query(QUERY, id);
     return rows;
 }
+
+// ************************************************************
+
+// ******************** Search Data ***************************
+
+app.get('/movie/search/:title', async (req, res) => {
+    const title = req.params.title;
+    console.log(title)
+    try {
+        const result = await getDataByTitle(title);
+        res.json(result);
+    } catch (error) {
+        throw error;
+    }
+});
+
+const getDataByTitle = async (title) => {
+    const QUERY = `SELECT * FROM mflixboard WHERE title LIKE ?`;
+    const [rows] = await promisePool.query(QUERY, `%${title}%`);
+    return rows;
+}
+
+// ************************************************************
