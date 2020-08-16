@@ -154,19 +154,18 @@ app.post('/movie/login', async (req, res) => {
     const passwordHash = await getPasswordHashByUsername(username);
     console.log(passwordHash)
     if (!passwordHash) {
-        return res.json('Username does not exist');
+        return res.json({ msg: 'Username does not exist', state: 405 });
     }
 
     const isAuthenticated = await bcrypt.compare(password, passwordHash);
-    isAuthenticated ? res.json("Loged in successfully") : res.json("Password is not correct");
+    isAuthenticated ? res.json({ msg: "Loged in successfully", state: 200 }) : res.json({ msg: "Password is not correct", state: 404 });
 
 });
 
 const getPasswordHashByUsername = async (username) => {
-    // 이걸 하시고 넵
     const QUERY = "SELECT password FROM loginDB where username = ?";
     const [rows] = await promisePool.query(QUERY, username);
-    return rows[0].password;
+    return rows.length == 0 ? 0 : rows[0].password;
 }
 
 
@@ -187,9 +186,15 @@ app.post('/movie/signup', async (req, res, next) => { // next 를 주게 되면 
         const usernameAlreadyExists = await usernameDoesExist(username);
         if (!usernameAlreadyExists) {
             const result = await storeUserInfo(username, hash);
-            res.json(result);
+            res.json({
+                result: result,
+                status: 200
+            });
         } else {
-            res.send("username is overlapped"); //스트링으로 전송하기 때문에 프론트단에서 fetch후에 response.json() 이 아니라 respose.text()를 해주거나 res.json("username is overlapped") 로 표기해줘야한다!!
+            res.json({
+                msg: "username is overlapped",
+                status: 405
+            }); //스트링으로 전송하기 때문에 프론트단에서 fetch후에 response.json() 이 아니라 respose.text()를 해주거나 res.json("username is overlapped") 로 표기해줘야한다!!
         }
     } catch (error) {
         next(new Error(error.message));
