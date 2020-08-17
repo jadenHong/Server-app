@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
-const data = require('./movies.json');
+const data = require('../data-json/movies.json');
 
 const SERVER_PORT = 6060;
 app.use(cors());

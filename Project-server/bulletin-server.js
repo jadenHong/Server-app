@@ -158,7 +158,7 @@ app.post('/movie/login', async (req, res) => {
     }
 
     const isAuthenticated = await bcrypt.compare(password, passwordHash);
-    isAuthenticated ? res.json({ msg: "Loged in successfully", state: 200 }) : res.json({ msg: "Password is not correct", state: 404 });
+    isAuthenticated ? res.json({ msg: "Logged in successfully", state: 200 }) : res.json({ msg: "Password is not correct", state: 404 });
 
 });
 

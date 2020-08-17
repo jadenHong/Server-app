@@ -3,7 +3,7 @@
 // get the client
 const mysql = require('mysql2');
 
-const data = require('../movies.json');
+const data = require('../data-json/movies.json');
 
 // create the connection to database
 const pool = mysql.createPool({

@@ -9,7 +9,7 @@ router.get('/test', (req, res) => {
     res.send('this is a test url');
 });
 
-// 첫째 파라미터는 주소 /getMoviesById/drama/ 이부분이 params 이다.
+// 첫째 파라미터는 주소 /getMoviesById/drama/  그다음 movie_id 이부분이 params 이다.
 router.get('/getMoviesById/drama/:movie_id', (req, res) => {
     const { genre, year } = req.query;
     const movie_id = Number(req.params.movie_id);
