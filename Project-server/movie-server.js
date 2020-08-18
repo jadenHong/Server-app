@@ -13,6 +13,8 @@ app.listen(SERVER_PORT, () => {
     console.log(`Server is listening to ${SERVER_PORT}`)
 })
 
+
+
 app.get('/movie/findMoviesByTitle/:title', (req, res) => {
     const title = req.params.title;
     // console.log(title)
