@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node bulletin-server.js",
     "country": "node country-server.js",
+    "lol": "node lol-server.js",
     "dev": "nodemon /movie-server.js",
     "start-app": "node index.js",
     "please-start-my-app": "node index.js"
@@ -16,10 +17,15 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
     "mysql2": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
     "nodemon": "^2.0.4"
   }
 }
