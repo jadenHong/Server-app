@@ -7,6 +7,7 @@
     "start": "node bulletin-server.js",
     "country": "node country-server.js",
     "lol": "node lol-server.js",
+    "lol:dev": "nodemon lol-server.js",
     "dev": "nodemon /movie-server.js",
     "start-app": "node index.js",
     "please-start-my-app": "node index.js"
