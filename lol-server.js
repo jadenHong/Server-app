@@ -6,7 +6,7 @@ const cors = require('cors');
 const data = require('./data-json/lol-champs.json');
 // 서버에서 바로 데이터를 받을 수 없어서 proxy-middleware 사용함
 
-// const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 
@@ -37,18 +37,18 @@ const {
     RIOT_TOKEN
 } = process.env;
 
-// const options = {
-//     target: 'https://kr.api.riotgames.com/',
-//     headers: {
-//         'X-Riot-Token': RIOT_TOKEN,
-//     },
-//     changeOrigin: true,
-//     router: req => {
-//         const { region } = req.query;
-//         return region ? `https://${region}.api.riotgames.com` : `https://kr.api.riotgames.com`;
-//     }
-// }
-// const lolProxy = createProxyMiddleware(options);
+const options = {
+    target: 'https://kr.api.riotgames.com/',
+    headers: {
+        'X-Riot-Token': RIOT_TOKEN,
+    },
+    changeOrigin: true,
+    router: req => {
+        const { region } = req.query;
+        return region ? `https://${region}.api.riotgames.com` : `https://kr.api.riotgames.com`;
+    }
+}
+const lolProxy = createProxyMiddleware(options);
 
 // 이부분이 호출이 되면 요청을 여기서 받고 응답을 해주고 '땡' 한다. 즉 끝. 그 다음건 읽지 않음.
 app.get('/champs', (req, res) => {
@@ -58,11 +58,11 @@ app.get('/champs', (req, res) => {
 })
 
 
-// app.use('/', lolProxy, (req, res) => {
-//     console.log(req.headers)
-//     console.log('hi');
-//     console.log(req.params.id);
-// });
+app.use('/', lolProxy, (req, res) => {
+    console.log(req.headers)
+    console.log('hi');
+    console.log(req.params.id);
+});
 
 
 app.listen(SERVER_PORT, () => {
