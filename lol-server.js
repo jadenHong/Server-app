@@ -3,7 +3,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const data = require('./data-json/lol-champs.json');
+const champsData = require('./data-json/lol-champs.json');
+const spellsData = require('./data-json/spells.json');
 // 서버에서 바로 데이터를 받을 수 없어서 proxy-middleware 사용함
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -51,10 +52,18 @@ const options = {
 const lolProxy = createProxyMiddleware(options);
 
 // 이부분이 호출이 되면 요청을 여기서 받고 응답을 해주고 '땡' 한다. 즉 끝. 그 다음건 읽지 않음.
+// 챔피언 정보 json 파일에서 받아온다.
 app.get('/champs', (req, res) => {
-    const champs = data.data;
+    const champs = champsData.data;
     console.log('champs');
     res.json(champs);
+})
+
+// 스펠 정보 json 파일에서 받아온다.
+app.get('/spells', (req, res) => {
+    const spells = spellsData.data;
+    console.log(spells);
+    res.json(spells);
 })
 
 
