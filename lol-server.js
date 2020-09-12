@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const champsData = require('./data-json/lol-champs.json');
 const spellsData = require('./data-json/spells.json');
+const runesData = require('./data-json/runes.json');
 // 서버에서 바로 데이터를 받을 수 없어서 proxy-middleware 사용함
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -62,10 +63,17 @@ app.get('/champs', (req, res) => {
 // 스펠 정보 json 파일에서 받아온다.
 app.get('/spells', (req, res) => {
     const spells = spellsData.data;
-    console.log(spells);
+    console.log('spells');
     res.json(spells);
 })
 
+// 룬 정보 json 파일에서 받아온다.
+app.get('/runes', (req, res) => {
+    console.log('rune 정보 받으러 들어옴');
+    const runes = runesData;
+    console.log(runes);
+    res.json(runes);
+})
 
 app.use('/', lolProxy, (req, res) => {
     console.log(req.headers)
