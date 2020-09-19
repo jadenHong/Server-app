@@ -29,6 +29,7 @@ app.use(cors());
 app.use('/CHALLENGER', challenger);
 app.use('/GRANDMASTER', grandmaster);
 app.use('/MASTER', master);
+app.use('/DIAMOND', diamond);
 
 
 app.use(express.json());
@@ -56,14 +57,14 @@ const lolProxy = createProxyMiddleware(options);
 // 챔피언 정보 json 파일에서 받아온다.
 app.get('/champs', (req, res) => {
     const champs = champsData.data;
-    console.log('champs');
+    console.log('champs 정보 받으러 들어옴');
     res.json(champs);
 })
 
 // 스펠 정보 json 파일에서 받아온다.
 app.get('/spells', (req, res) => {
     const spells = spellsData.data;
-    console.log('spells');
+    console.log('spells 정보 받으러 들어옴');
     res.json(spells);
 })
 
@@ -71,7 +72,7 @@ app.get('/spells', (req, res) => {
 app.get('/runes', (req, res) => {
     console.log('rune 정보 받으러 들어옴');
     const runes = runesData;
-    console.log(runes);
+    // console.log(runes);
     res.json(runes);
 })
 

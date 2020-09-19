@@ -5,7 +5,7 @@ const axios = require('axios');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 app.use(express.json());
-
+console.log('챌린저 정보')
 const {
     RIOT_TOKEN
 } = process.env;
@@ -22,8 +22,12 @@ const options = {
     },
     router: req => {
         const { division, region, tierPage } = req.query;
-        console.log(tierPage, region)
+        console.log(tierPage, region, division)
+        console.log(region);
+        // http://localhost:7779/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?region=kr
+        console.log(`https://${region}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/${division}?page=${tierPage}&${RIOT_TOKEN}`)
         return region ? `https://${region}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/${division}?page=${tierPage}&${RIOT_TOKEN}` : `https://kr.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/${division}?page=${tierPage}&${RIOT_TOKEN}`;
+        // return region ? `https://${region}.api.riotgames.com` : `https://kr.api.riotgames.com`;
     }
 
 }
