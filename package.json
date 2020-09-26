@@ -7,7 +7,7 @@
     "start": "node bulletin-server.js",
     "country": "node country-server.js",
     "lol": "node lol-server.js",
-    "lol:dev": "nodemon lol-server.js",
+    "lol:dev": "nodemon Project-server/lol-server.js",
     "dev": "nodemon /movie-server.js",
     "start-app": "node index.js",
     "please-start-my-app": "node index.js"
@@ -18,11 +18,14 @@
   "dependencies": {
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.5",
-    "mysql2": "^2.1.0"
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
