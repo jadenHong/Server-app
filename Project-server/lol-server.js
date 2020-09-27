@@ -1,6 +1,7 @@
 // npm i dotenv 명령어로 dotenv 설치. 환경변수를 위한 .env 파일을 따로 만들어서 호출하게 해주는 API이다. 모든 중요한 정보 (비밀번호, 키 등등)들은 환경변수에 저장을하고 그것을 불러와야하며 환경변수 파일 .env 는 gitignore에 추가를 해서 commit을 방지해야한다 무조건!!!
 require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const champsData = require('../data-json/lol-champs.json');
 const spellsData = require('../data-json/spells.json');
@@ -16,7 +17,6 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 app.use(cors());
 
-// get tier
 
 const challenger = require('../routes/getChallenger');
 const grandmaster = require('../routes/getGrandmaster');
@@ -27,6 +27,7 @@ const gold = require('../routes/getGold');
 const silver = require('../routes/getSilver');
 const bronze = require('../routes/getBronze');
 const iron = require('../routes/getIron');
+
 // sign in sign up
 const customers = require('../routes/getCustomers');
 
@@ -36,8 +37,11 @@ app.use('/CHALLENGER', challenger);
 app.use('/GRANDMASTER', grandmaster);
 app.use('/MASTER', master);
 app.use('/DIAMOND', diamond);
+
 // signup, signin 을 위한 middleware
 app.use('/user', customers);
+
+
 
 
 // app.post('/login', (req, res) => {
